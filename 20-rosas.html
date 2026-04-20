@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 rosas para mi amochito 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pink1:#f8c8dc;--pink2:#f4a0c0;--pink3:#e889a8;
+  --purple1:#d4a0d6;--purple2:#b768c0;--purple3:#9b4dca;
+  --dark:#4a1942;
+}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#fce4ec 0%,#f3c6e0 25%,#e8b4d8 50%,#d4a0d6 75%,#c890c8 100%);
+  font-family:'Lora',serif;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(244,160,192,0.3) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 20%,rgba(183,104,192,0.25) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(232,137,168,0.2) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* Floating petals */
+.petal{
+  position:fixed;
+  width:12px;height:12px;
+  background:radial-gradient(ellipse,rgba(244,160,192,0.7),rgba(212,160,214,0.4));
+  border-radius:50% 0 50% 50%;
+  pointer-events:none;
+  z-index:1;
+  animation:floatPetal linear infinite;
+  opacity:0;
+}
+@keyframes floatPetal{
+  0%{transform:translateY(-10vh) rotate(0deg) scale(0.5);opacity:0}
+  10%{opacity:0.7}
+  90%{opacity:0.5}
+  100%{transform:translateY(110vh) rotate(720deg) scale(0.2);opacity:0}
+}
+
+/* Sparkles */
+.sparkle{
+  position:fixed;
+  width:6px;height:6px;
+  background:radial-gradient(circle,#fff,rgba(255,200,230,0.8));
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+  animation:twinkle ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(0)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+/* Header */
+.header{
+  text-align:center;
+  padding:50px 20px 30px;
+  position:relative;
+  z-index:2;
+}
+.header h1{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(2.5rem,7vw,5rem);
+  color:var(--dark);
+  text-shadow:2px 2px 8px rgba(155,77,202,0.3),0 0 30px rgba(244,160,192,0.4);
+  animation:titleGlow 3s ease-in-out infinite alternate;
+  line-height:1.3;
+}
+@keyframes titleGlow{
+  0%{text-shadow:2px 2px 8px rgba(155,77,202,0.3),0 0 30px rgba(244,160,192,0.4)}
+  100%{text-shadow:2px 2px 12px rgba(155,77,202,0.5),0 0 50px rgba(244,160,192,0.6),0 0 80px rgba(183,104,192,0.3)}
+}
+.header .subtitle{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(0.9rem,2.5vw,1.3rem);
+  color:#8e3a6e;
+  margin-top:10px;
+  opacity:0.8;
+}
+.header .hearts{
+  font-size:1.5rem;
+  margin-top:10px;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+/* Decorative divider */
+.divider{
+  display:flex;align-items:center;justify-content:center;gap:15px;
+  margin:10px auto 30px;
+  max-width:500px;
+  z-index:2;position:relative;
+}
+.divider span{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,transparent,#d4a0d6,transparent);
+}
+.divider .diamond{
+  width:10px;height:10px;
+  background:linear-gradient(135deg,#f4a0c0,#b768c0);
+  transform:rotate(45deg);
+  box-shadow:0 0 8px rgba(183,104,192,0.5);
+}
+
+/* Rose Grid */
+.roses-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:30px;
+  position:relative;
+  z-index:2;
+}
+.rose-card{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.4);
+  border-radius:20px;
+  padding:25px 15px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(155,77,202,0.12);
+}
+.rose-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,var(--rose-color),transparent);
+  opacity:0;
+  transition:opacity 0.4s;
+}
+.rose-card:hover::before{opacity:1}
+.rose-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 16px 48px rgba(155,77,202,0.25),0 0 20px rgba(var(--rose-color-rgb),0.2);
+  background:rgba(255,255,255,0.4);
+}
+.rose-card:active{transform:translateY(-2px) scale(0.98)}
+
+.rose-card .rose-svg{
+  width:100px;height:100px;
+  margin:0 auto 10px;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  transition:transform 0.4s;
+}
+.rose-card:hover .rose-svg{transform:scale(1.1) rotate(5deg)}
+
+.rose-card .rose-label{
+  font-family:'Playfair Display',serif;
+  font-size:0.85rem;
+  color:var(--dark);
+  font-weight:700;
+  margin-top:5px;
+}
+.rose-card .rose-number{
+  font-family:'Great Vibes',cursive;
+  font-size:1.4rem;
+  color:var(--purple2);
+  opacity:0.7;
+}
+
+/* Modal Overlay */
+.modal-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(74,25,66,0.75);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;
+  transition:all 0.5s ease;
+  padding:20px;
+}
+.modal-overlay.active{opacity:1;visibility:visible}
+
+.modal-content{
+  background:linear-gradient(145deg,#fff5f8,#f5e6f5,#ede0f0);
+  border-radius:30px;
+  max-width:850px;width:100%;
+  display:flex;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(74,25,66,0.4),0 0 60px rgba(183,104,192,0.2);
+  transform:scale(0.7) translateY(30px);
+  transition:transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  position:relative;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.modal-overlay.active .modal-content{transform:scale(1) translateY(0)}
+
+.modal-close{
+  position:absolute;top:15px;right:20px;
+  background:rgba(155,77,202,0.15);
+  border:none;
+  width:40px;height:40px;
+  border-radius:50%;
+  font-size:1.3rem;
+  cursor:pointer;
+  color:var(--dark);
+  transition:all 0.3s;
+  z-index:10;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{
+  background:rgba(155,77,202,0.3);
+  transform:rotate(90deg) scale(1.1);
+}
+
+.modal-rose-section{
+  flex:0 0 45%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 30px;
+  background:linear-gradient(135deg,rgba(var(--rose-color-rgb),0.08),rgba(212,160,214,0.1));
+  position:relative;
+}
+.modal-rose-section::after{
+  content:'';position:absolute;right:0;top:10%;bottom:10%;
+  width:1px;
+  background:linear-gradient(transparent,rgba(155,77,202,0.3),transparent);
+}
+.modal-rose-svg{
+  width:200px;height:200px;
+  filter:drop-shadow(0 8px 25px rgba(0,0,0,0.2));
+  animation:modalRoseFloat 4s ease-in-out infinite;
+}
+@keyframes modalRoseFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-10px) rotate(3deg)}
+}
+.modal-rose-label{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  color:var(--dark);
+  margin-top:15px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+.modal-rose-number{
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;
+  color:var(--purple2);
+  margin-top:5px;
+}
+
+.modal-text-section{
+  flex:1;
+  padding:40px 35px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.modal-text-section h2{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+  color:var(--dark);
+  margin-bottom:20px;
+  line-height:1.3;
+}
+.modal-text-section p{
+  font-family:'Lora',serif;
+  font-size:clamp(0.85rem,2vw,1rem);
+  color:#6a3a5a;
+  line-height:1.8;
+  text-align:justify;
+}
+.modal-text-section .quote{
+  margin-top:20px;
+  font-style:italic;
+  color:var(--purple2);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(0.9rem,2vw,1.05rem);
+  border-left:3px solid var(--pink2);
+  padding-left:15px;
+}
+
+/* Decorative corner elements on modal */
+.modal-content .corner-deco{
+  position:absolute;
+  width:60px;height:60px;
+  opacity:0.3;
+}
+.modal-content .corner-deco.tl{top:10px;left:10px;border-top:2px solid var(--purple2);border-left:2px solid var(--purple2);border-radius:10px 0 0 0}
+.modal-content .corner-deco.br{bottom:10px;right:10px;border-bottom:2px solid var(--purple2);border-right:2px solid var(--purple2);border-radius:0 0 10px 0}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding:50px 20px 40px;
+  position:relative;z-index:2;
+}
+.footer p{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(1.3rem,4vw,2rem);
+  color:var(--dark);
+  text-shadow:1px 1px 4px rgba(155,77,202,0.2);
+}
+.footer .small{
+  font-family:'Lora',serif;
+  font-size:0.8rem;
+  color:#8e3a6e;
+  opacity:0.6;
+  margin-top:8px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .roses-container{
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:20px;
+    padding:15px;
+  }
+  .rose-card{padding:20px 10px 15px}
+  .rose-card .rose-svg{width:80px;height:80px}
+  .modal-content{flex-direction:column;max-height:90vh;overflow-y:auto}
+  .modal-rose-section{flex:none;padding:30px 20px 20px}
+  .modal-rose-section::after{display:none}
+  .modal-rose-svg{width:140px;height:140px}
+  .modal-text-section{padding:20px 25px 30px}
+  .modal-text-section h2{text-align:center}
+  .modal-text-section p{text-align:center}
+  .modal-text-section .quote{text-align:center;border-left:none;border-top:2px solid var(--pink2);padding-left:0;padding-top:10px}
+}
+@media(max-width:400px){
+  .roses-container{grid-template-columns:repeat(2,1fr);gap:12px}
+  .rose-card .rose-svg{width:70px;height:70px}
+  .header{padding:30px 15px 20px}
+}
+
+/* Entrance animations */
+.rose-card{
+  opacity:0;
+  animation:fadeInUp 0.6s ease forwards;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div id="petals-container"></div>
+<!-- Sparkles -->
+<div id="sparkles-container"></div>
+
+<!-- Header -->
+<header class="header">
+  <h1>20 rosas para mi amochito</h1>
+  <p class="subtitle">Cada rosa guarda un sentimiento especial para ti 💙</p>
+  <div class="hearts">💜 🌹 💙 🌹 💜</div>
+</header>
+
+<div class="divider">
+  <span></span>
+  <div class="diamond"></div>
+  <span></span>
+</div>
+
+<!-- Roses Grid -->
+<div class="roses-container" id="rosesContainer"></div>
+
+<div class="divider" style="margin-top:40px">
+  <span></span>
+  <div class="diamond"></div>
+  <span></span>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>Con todo mi amor, para siempre 💙</p>
+  <p class="small">~ para mi amochito ~</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-content" id="modalContent">
+    <div class="corner-deco tl"></div>
+    <div class="corner-deco br"></div>
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <div class="modal-rose-section" id="modalRoseSection">
+      <div class="modal-rose-svg" id="modalRoseSvg"></div>
+      <div class="modal-rose-label" id="modalRoseLabel"></div>
+      <div class="modal-rose-number" id="modalRoseNumber"></div>
+    </div>
+    <div class="modal-text-section">
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <div class="quote" id="modalQuote"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const rosesData = [
+  {
+    name:"Tu voz es mi melodía favorita",
+    color:"#87CEEB",dark:"#5BA3C9",light:"#B8E4F5",
+    label:"Melodía del alma",
+    text:"Cada vez que hablas, el mundo se detiene. No es solo lo que dices, es el tono, la suavidad, la manera en que mis oídos reconocen tu voz como el sonido más hermoso que existe. Me pierdo en ella, me calma, me eleva, me hace sentir en casa.",
+    quote:"Tu voz es la canción que mi alma quería escuchar."
+  },
+  {
+    name:"Tu sonrisa me desarma por completo",
+    color:"#6495ED",dark:"#4A7BD4",light:"#9ABCEF",
+    label:"Luz que me ilumina",
+    text:"No importa qué tan complicado esté mi día, con solo verte sonreír todo se ilumina. Es como si el sol decidiera brillar solo para ti, y a mí me alcanza con ser testigo de esa luz. Tu sonrisa es mi refugio, mi paz, mi razón para seguir intentando ser mejor.",
+    quote:"Una sonrisa tuya borra cualquier tormenta."
+  },
+  {
+    name:"Me enamoro de tus ojitos cada vez que te miro",
+    color:"#0047AB",dark:"#003070",light:"#3A7BD5",
+    label:"Universo en tu mirada",
+    text:"Hay un universo entero en tu mirada. A veces tiernos, a veces traviesos, siempre sinceros. Cuando me miras, siento que me ves el alma, que entiendes lo que ni yo mismo sé decir. Y en ese cruce de miradas, me vuelvo a enamorar, como si fuera la primera vez.",
+    quote:"En tus ojos encontré mi hogar."
+  },
+  {
+    name:"Eres mi primer pensamiento al despertar y el último al dormir",
+    color:"#0F52BA",dark:"#0A3A85",light:"#4A82D9",
+    label:"Mi rutina de amor",
+    text:"No hay día que empiece sin que mi mente te busque, ni noche que termine sin que mi corazón te nombre. Eres mi rutina más bonita, mi constante dulce, mi sueño hecho realidad que no quiero dejar de vivir ni un solo instante.",
+    quote:"Mi día empieza y termina contigo."
+  },
+  {
+    name:"Adoro cada detalle tuyo, hasta los que tú no notas",
+    color:"#4169E1",dark:"#2E4DB0",light:"#7090E8",
+    label:"Tesoros invisibles",
+    text:"La forma en que te acomodas el cabello, cómo arrugas la naricita cuando ríes, el gesto que haces cuando estás concentrada... todo de ti me fascina. No hay pequeño movimiento tuyo que no guarde en mi memoria como un tesoro.",
+    quote:"Cada gesto tuyo es poesía que guardo en el pecho."
+  },
+  {
+    name:"Eres única, irrepetible, y eso me vuelve loco de amor",
+    color:"#B0D4F1",dark:"#8BBDE0",light:"#D0E8F7",
+    label:"Obra maestra del universo",
+    text:"Podría recorrer el mundo entero y jamás encontraría a alguien como tú. No es solo tu belleza, es tu esencia, tu forma de ser, de sentir, de amar. Eres una obra de arte que el universo pintó con cuidado especial, solo para mí.",
+    quote:"No existe otra igual, ni la habrá jamás."
+  },
+  {
+    name:"Me encanta cómo me haces sentir cuando estoy cerca de ti",
+    color:"#30D5C8",dark:"#25A89E",light:"#68E8DE",
+    label:"Paz en tu presencia",
+    text:"Contigo no necesito fingir, no necesito esforzarme por ser alguien más. A tu lado soy yo, completo, tranquilo, feliz. Tu presencia me abraza sin tocarme, me calma sin palabras, me llena sin pedir nada a cambio.",
+    quote:"A tu lado, respiro en paz."
+  },
+  {
+    name:"Soñar contigo es mi pasatiempo favorito",
+    color:"#4682B4",dark:"#36648B",light:"#7BAED4",
+    label:"Promesas del corazón",
+    text:"Imagino nuestros días juntos, las risas, los silencios cómplices, los planes que construiremos. No son solo sueños: son promesas que mi corazón ya está escribiendo, esperando el momento para hacerlas reales a tu lado.",
+    quote:"Mis sueños tienen tu nombre y tu abrazo."
+  },
+  {
+    name:"Quiero ser tu lugar seguro, tu abrazo cuando el mundo pese",
+    color:"#191970",dark:"#0F0F4A",light:"#2E2EA0",
+    label:"Refugio para tu alma",
+    text:"Si algún día sientes que todo es demasiado, recuérdame. Estoy aquí para sostenerte, para escucharte sin juzgar, para abrazarte hasta que la tormenta pase. No tienes que cargar nada sola: conmigo, siempre puedes soltar.",
+    quote:"Mis brazos son tu refugio, siempre."
+  },
+  {
+    name:"Desde que te conocí, mi vida tiene otro color",
+    color:"#7B68EE",dark:"#5E48D0",light:"#A89BF0",
+    label:"Mi mundo pintado por ti",
+    text:"Antes todo era gris, rutina, vacío. Llegaste tú y pintaste mi mundo de azul, de rosa, de dorado. Cada momento a tu lado es un brote de felicidad que no sabía que podía existir. Gracias por enseñarme a vivir de verdad.",
+    quote:"Antes era sombra, contigo soy luz."
+  },
+  {
+    name:"No quiero que cambies ni un solo pelo por mí",
+    color:"#B0C4DE",dark:"#8FA8C8",light:"#D0DDEF",
+    label:"Perfecta en tu esencia",
+    text:"Eres perfecta tal como eres. No busco arreglarte, ni moldearte, ni mejorar nada en ti. Lo que amo es justamente eso: tu autenticidad, tu esencia pura. Yo crezco por ti, pero tú nunca tienes que dejar de ser tú.",
+    quote:"Te amo completa, sin condiciones ni filtros."
+  },
+  {
+    name:"Construir un futuro contigo es mi mayor motivación",
+    color:"#4B0082",dark:"#35005C",light:"#6E2EA8",
+    label:"Nuestro mañana juntos",
+    text:"Cada esfuerzo que hago, cada meta que persigo, tiene tu nombre. No sueño con riquezas ni lujos: sueño con despertarme a tu lado, con verte cumplir tus sueños, con caminar de la mano hacia todo lo que nos espera.",
+    quote:"Mi futuro se dibuja a tu lado."
+  },
+  {
+    name:"Todas tus emociones son bienvenidas en mi corazón",
+    color:"#AEC6CF",dark:"#8DA9B5",light:"#CDE0E8",
+    label:"Espacio para todo lo que sientes",
+    text:"Si estás triste, lloro contigo. Si estás feliz, celebro a tu lado. Si estás enojada, te escucho. Si tienes miedo, te sostengo. No hay sentimiento tuyo que no tenga espacio en mí. Porque amarte es aceptarte completa, en cada estado, en cada latido.",
+    quote:"Tus sentimientos son mi refugio, no tu carga."
+  },
+  {
+    name:"Nuestro pasado nos trajo aquí, nuestro presente nos une, nuestro futuro nos espera",
+    color:"#1B3A5C",dark:"#102540",light:"#3A5A7D",
+    label:"Historia de dos almas",
+    text:"Cada paso que dimos, cada lágrima, cada risa, nos fue guiando hasta este momento. Hoy nos elegimos de nuevo. Y mañana, pase lo que pase, lo enfrentaremos juntos. Nuestra historia no tiene final: solo capítulos por escribir, mano a mano.",
+    quote:"El tiempo nos une, el amor nos guía."
+  },
+  {
+    name:"No dejes que nadie apague la luz que hay entre nosotros",
+    color:"#003153",dark:"#001A2E",light:"#1A4D73",
+    label:"Nuestra luz sagrada",
+    text:"A veces el mundo opina, juzga, interfiere. Pero lo que tenemos es nuestro, sagrado, íntimo. No permitas que voces ajenas nublen lo que sentimos. Solo tú y yo sabemos la verdad de este amor: déjala brillar, sin filtros, sin miedo.",
+    quote:"Nuestra luz es solo nuestra, nadie la apaga."
+  },
+  {
+    name:"Vivamos a nuestro ritmo, sin prisas, sin presiones",
+    color:"#A8D8EA",dark:"#82BBD4",light:"#C8E8F2",
+    label:"Nuestra propia música",
+    text:"No necesitamos seguir reglas que no son nuestras. Nuestro amor tiene su propia música, su propio compás. Caminemos despacio si hace falta, corramos si el corazón lo pide, pero siempre juntos, siempre en sintonía.",
+    quote:"Nuestro tiempo es nuestro, y es perfecto."
+  },
+  {
+    name:"Cuando hay dudas, recordemos que nos amamos",
+    color:"#26619C",dark:"#1A4570",light:"#4A85C4",
+    label:"Nuestra certeza eterna",
+    text:"A veces no entendemos, a veces duele, a veces parece que no encajamos. Pero en medio de cualquier tormenta, hay una verdad que nunca cambia: nos amamos. Ese es nuestro ancla, nuestra brújula, nuestra certeza. Volvamos a ella siempre.",
+    quote:"En la duda, solo hay una verdad: nos amamos."
+  },
+  {
+    name:"Salir de la trampa de los miedos, para abrazar la libertad de amarnos",
+    color:"#779ECB",dark:"#5D82B0",light:"#A8C4DE",
+    label:"Libertad de amarte",
+    text:"A veces el amor asusta, porque es grande, porque es real. Pero cuando soltamos el miedo, cuando dejamos de proteger el corazón y simplemente lo abrimos, descubrimos que amarte no es una prisión: es la libertad más hermosa que existe.",
+    quote:"Amarte es mi mayor libertad."
+  },
+  {
+    name:"Somos dos almas que se encontraron para no soltarse jamás",
+    color:"#0055FF",dark:"#0040CC",light:"#4D88FF",
+    label:"Dos universos, uno solo",
+    text:"No fue casualidad, no fue suerte. Fue destino, fue conexión, fue reconocimiento. Dos universos que chocaron suavemente para crear uno solo: el nuestro. Y en este nuevo mundo, todo tiene sentido, todo brilla, todo es amor.",
+    quote:"Dos almas, un solo latido."
+  },
+  {
+    name:"Eres mi eternidad en un mundo de momentos",
+    color:"#6C8EBF",dark:"#5270A0",light:"#94B0D4",
+    label:"Mi amor para siempre",
+    text:"Platón hablaba de sombras, pero yo ya no busco más: la verdad está en ti. En tu risa, en tu abrazo, en tu forma de mirarme. Contigo, el tiempo deja de importar. Porque lo nuestro no es de hoy, ni de mañana: es de siempre. Eres mi primer amor, mi único amor, mi amor para toda la vida.",
+    quote:"Eres mi eternidad, mi hoy y mi siempre."
+  }
+];
+
+function createRoseSVG(color, darkColor, lightColor) {
+  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 140 Q95 160 98 180 Q100 190 100 195" stroke="#2d5a3d" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M98 165 Q75 155 65 160 Q70 170 98 172" fill="#3a7d4a" stroke="#2d5a3d" stroke-width="0.5"/>
+    <path d="M98 175 Q120 168 130 172 Q125 180 98 182" fill="#3a7d4a" stroke="#2d5a3d" stroke-width="0.5"/>
+    <path d="M98 158 Q80 148 72 152 Q78 162 98 165" fill="#4a9458" stroke="#2d5a3d" stroke-width="0.5"/>
+    <ellipse cx="100" cy="105" rx="48" ry="42" fill="${darkColor}" opacity="0.6"/>
+    <ellipse cx="80" cy="95" rx="30" ry="38" fill="${color}" transform="rotate(-25,80,95)" opacity="0.8"/>
+    <ellipse cx="120" cy="95" rx="30" ry="38" fill="${color}" transform="rotate(25,120,95)" opacity="0.8"/>
+    <ellipse cx="85" cy="110" rx="28" ry="35" fill="${lightColor}" transform="rotate(-15,85,110)" opacity="0.7"/>
+    <ellipse cx="115" cy="110" rx="28" ry="35" fill="${lightColor}" transform="rotate(15,115,110)" opacity="0.7"/>
+    <ellipse cx="95" cy="90" rx="25" ry="30" fill="${color}" transform="rotate(-10,95,90)" opacity="0.9"/>
+    <ellipse cx="108" cy="92" rx="25" ry="28" fill="${darkColor}" transform="rotate(12,108,92)" opacity="0.85"/>
+    <ellipse cx="100" cy="85" rx="22" ry="26" fill="${lightColor}" opacity="0.8"/>
+    <ellipse cx="96" cy="80" rx="18" ry="22" fill="${color}" transform="rotate(-5,96,80)" opacity="0.9"/>
+    <ellipse cx="106" cy="82" rx="16" ry="20" fill="${darkColor}" transform="rotate(8,106,82)" opacity="0.85"/>
+    <ellipse cx="100" cy="75" rx="12" ry="15" fill="${lightColor}" opacity="0.9"/>
+    <ellipse cx="98" cy="72" rx="8" ry="10" fill="${color}" opacity="0.8"/>
+    <ellipse cx="101" cy="70" rx="5" ry="7" fill="${darkColor}" opacity="0.7"/>
+    <path d="M98 68 Q102 65 104 68 Q106 72 102 74 Q98 76 96 72 Q94 68 98 66" fill="none" stroke="${darkColor}" stroke-width="1" opacity="0.5"/>
+    <ellipse cx="88" cy="88" rx="6" ry="12" fill="white" opacity="0.15" transform="rotate(-20,88,88)"/>
+    <ellipse cx="112" cy="90" rx="5" ry="10" fill="white" opacity="0.12" transform="rotate(15,112,90)"/>
+    <ellipse cx="100" cy="78" rx="4" ry="6" fill="white" opacity="0.2"/>
+    <circle cx="82" cy="100" r="2.5" fill="white" opacity="0.4"/>
+    <circle cx="118" cy="105" r="2" fill="white" opacity="0.3"/>
+    <circle cx="92" cy="75" r="1.5" fill="white" opacity="0.35"/>
+  </svg>`;
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+const container = document.getElementById('rosesContainer');
+rosesData.forEach((rose, i) => {
+  const card = document.createElement('div');
+  card.className = 'rose-card';
+  card.style.setProperty('--rose-color', rose.color);
+  card.style.setProperty('--rose-color-rgb', hexToRgb(rose.color));
+  card.style.animationDelay = `${i * 0.08}s`;
+  card.innerHTML = `
+    <div class="rose-number">#${i + 1}</div>
+    <div class="rose-svg">${createRoseSVG(rose.color, rose.dark, rose.light)}</div>
+    <div class="rose-label">${rose.label}</div>
+  `;
+  card.addEventListener('click', () => openModal(i));
+  container.appendChild(card);
+});
+
+const modal = document.getElementById('modal');
+const modalClose = document.getElementById('modalClose');
+const modalRoseSvg = document.getElementById('modalRoseSvg');
+const modalRoseLabel = document.getElementById('modalRoseLabel');
+const modalRoseNumber = document.getElementById('modalRoseNumber');
+const modalTitle = document.getElementById('modalTitle');
+const modalText = document.getElementById('modalText');
+const modalQuote = document.getElementById('modalQuote');
+const modalRoseSection = document.getElementById('modalRoseSection');
+
+function openModal(index) {
+  const rose = rosesData[index];
+  const rgb = hexToRgb(rose.color);
+  modalRoseSection.style.setProperty('--rose-color-rgb', rgb);
+  modalRoseSvg.innerHTML = createRoseSVG(rose.color, rose.dark, rose.light);
+  modalRoseLabel.textContent = rose.name;
+  modalRoseNumber.textContent = `Rosa #${index + 1}`;
+  modalTitle.textContent = rose.name;
+  modalText.textContent = rose.text;
+  modalQuote.textContent = `❝ ${rose.quote} ❞`;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+const petalsContainer = document.getElementById('petals-container');
+for(let i=0;i<15;i++){
+  const petal=document.createElement('div');
+  petal.className='petal';
+  petal.style.left=Math.random()*100+'vw';
+  petal.style.animationDuration=(8+Math.random()*12)+'s';
+  petal.style.animationDelay=(Math.random()*15)+'s';
+  petal.style.width=(8+Math.random()*10)+'px';
+  petal.style.height=(8+Math.random()*10)+'px';
+  petalsContainer.appendChild(petal);
+}
+
+const sparklesContainer = document.getElementById('sparkles-container');
+for(let i=0;i<20;i++){
+  const sparkle=document.createElement('div');
+  sparkle.className='sparkle';
+  sparkle.style.left=Math.random()*100+'vw';
+  sparkle.style.top=Math.random()*100+'vh';
+  sparkle.style.animationDuration=(2+Math.random()*3)+'s';
+  sparkle.style.animationDelay=(Math.random()*5)+'s';
+  sparklesContainer.appendChild(sparkle);
+}
+</script>
+</body>
+</html>
